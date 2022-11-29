@@ -55,7 +55,7 @@ public class Constants {
 	public static final String IGNORE_UNSAFE_CONNECTION_ERROR = "IgnoreUnsafeConnectionError";
 
 	// Connection Default Values
-	public static final String URL_DEFAULT = "https://localhost/";
+	public static final String URL_DEFAULT = "https://rss.nuvemshop.com/";
 	public static final String URL_DEFAULT_FEEDICONS = "feed-icons";
 	public static final boolean USE_HTTP_AUTH_DEFAULT = false;
 	public static final boolean USE_PROVIDER_INSTALLER_DEFAULT = true;
@@ -78,12 +78,12 @@ public class Constants {
 	public static final String ALLOW_TABLET_LAYOUT = "AllowTabletLayoutPreference";
 	public static final String HIDE_FEED_READ_BUTTONS = "HideFeedReadButtons";
 	// Usage Default Values
-	public static final boolean OPEN_URL_EMPTY_ARTICLE_DEFAULT = false;
+	public static final boolean OPEN_URL_EMPTY_ARTICLE_DEFAULT = true;
 	public static final boolean USE_VOLUME_KEYS_DEFAULT = false;
 	public static final boolean LOAD_IMAGES_DEFAULT = true;
-	public static final boolean INVERT_BROWSING_DEFAULT = false;
+	public static final boolean INVERT_BROWSING_DEFAULT = true;
 	public static final boolean WORK_OFFLINE_DEFAULT = false;
-	public static final boolean GO_BACK_AFTER_MARK_ALL_READ_DEFAULT = false;
+	public static final boolean GO_BACK_AFTER_MARK_ALL_READ_DEFAULT = true;
 	public static final boolean HIDE_ACTIONBAR_DEFAULT = true;
 	public static final boolean ALLOW_TABLET_LAYOUT_DEFAULT = true;
 	public static final boolean HIDE_FEED_READ_BUTTONS_DEFAULT = false;
@@ -115,7 +115,7 @@ public class Constants {
 	public static final int THEME_BLACK = 3;
 	public static final int THEME_WHITE = 4;
 	public static final String THEME_DEFAULT = "0"; // Needs to be a string
-	public static final boolean ANIMATIONS_DEFAULT = true;
+	public static final boolean ANIMATIONS_DEFAULT = false;
 	public static final int TEXT_ZOOM_DEFAULT = 100;
 	public static final boolean SUPPORT_ZOOM_CONTROLS_DEFAULT = true;
 	public static final boolean ALLOW_HYPHENATION_DEFAULT = false;
@@ -124,7 +124,7 @@ public class Constants {
 	public static final String SHOW_BUTTONS_MODE_DEFAULT = "0"; // Needs to be a string
 	public static final int SHOW_BUTTONS_MODE_ALLWAYS = 1;
 	public static final int SHOW_BUTTONS_MODE_HTML = 2;
-	public static final boolean ONLY_UNREAD_DEFAULT = false;
+	public static final boolean ONLY_UNREAD_DEFAULT = true;
 	public static final boolean ONLY_CACHED_IMAGES_DEFAULT = false;
 	public static final boolean INVERT_SORT_ARTICLELIST_DEFAULT = false;
 	public static final boolean INVERT_SORT_FEEDSCATS_DEFAULT = false;
