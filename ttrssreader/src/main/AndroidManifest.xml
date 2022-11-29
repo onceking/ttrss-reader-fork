@@ -60,7 +60,8 @@
         <activity
             android:name=".gui.CategoryActivity"
             android:label="@string/ApplicationName"
-            android:theme="@style/AppTheme.BrandedLaunch">
+            android:theme="@style/AppTheme.BrandedLaunch"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,7 +75,8 @@
         <activity android:name=".gui.ErrorActivity" />
         <activity
             android:name=".gui.AboutActivity"
-            android:label="@string/AboutActivity_Title">
+            android:label="@string/AboutActivity_Title"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -83,7 +85,8 @@
             android:name=".gui.ShareActivity"
             android:excludeFromRecents="true"
             android:label="@string/IntentPublish"
-            android:theme="@style/AppTheme.BrandedLaunch">
+            android:theme="@style/AppTheme.BrandedLaunch"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -93,7 +96,8 @@
         <activity
             android:name=".gui.SubscribeActivity"
             android:label="@string/IntentSubscribe"
-            android:theme="@style/AppTheme.BrandedLaunch">
+            android:theme="@style/AppTheme.BrandedLaunch"
+            android:exported="true">
 
             <!-- android:excludeFromRecents="true" -->
             <intent-filter>
