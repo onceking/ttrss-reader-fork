@@ -106,37 +106,41 @@ public class FeedHeadlineAdapter extends MainAdapter {
 		ViewHolder holder = (ViewHolder) view.getTag();
 		if (holder == null) {
 			holder = new ViewHolder();
-			holder.icon = (ImageView) view.findViewById(R.id.icon);
+//			holder.icon = (ImageView) view.findViewById(R.id.icon);
 			holder.feedicon = (ImageView) view.findViewById(R.id.feedicon);
 			holder.title = (TextView) view.findViewById(R.id.title);
 			holder.updateDate = (TextView) view.findViewById(R.id.updateDate);
-			holder.dataSource = (TextView) view.findViewById(R.id.dataSource);
+//			holder.dataSource = (TextView) view.findViewById(R.id.dataSource);
 			view.setTag(holder);
 		}
 
 		final Article a = getArticle(cursor);
 		final Feed f = DBHelper.getInstance().getFeed(a.feedId);
 
-		setImage(holder.icon, a);
+//		setImage(holder.icon, a);
 		setFeedImage(holder.feedicon, f);
 
-		holder.title.setText(a.title);
+		holder.title.setText((a.isUnread ? "⬤ " :"◯ ") + a.title );
 		float opacity = a.isUnread ? 1 : 0.7f;
-		for (View transparent: new View[]{holder.title, holder.updateDate, holder.dataSource}) {
+		for (View transparent: new View[]{holder.title, holder.updateDate/*, holder.dataSource*/}) {
 			transparent.setAlpha(opacity);
 		}
-		if (a.isUnread)
-			holder.title.setTypeface(Typeface.DEFAULT_BOLD);
-		else
-			holder.title.setTypeface(Typeface.DEFAULT);
 
-		final String date = DateUtils.getDateTime(context, a.updated);
-		holder.updateDate.setText(date.length() > 0 ? "(" + date + ")" : "");
+		final long age = Math.abs((new Date()).getTime() - a.updated.getTime()) / 1000;
+		if (age <= 3600) {
+			holder.updateDate.setText("1h");
+		} else if (age <= 24 * 3600) {
+			holder.updateDate.setText(String.format("%dh", (age / 3600)));
+		} else if (age < 24 * 3600 * 100) {
+			holder.updateDate.setText(String.format("%dd", (age / (24 * 3600))));
+		} else {
+			holder.updateDate.setText(">100d");
+		}
 
 		// Display Feed-Title in Virtual-Categories or when displaying all Articles in a Category
-		if ((feedId < 0 && feedId >= -4) || (selectArticlesForCategory)) {
-			holder.dataSource.setText(a.feedTitle);
-		}
+//		if ((feedId < 0 && feedId >= -4) || (selectArticlesForCategory)) {
+//			holder.dataSource.setText(a.feedTitle);
+//		}
 	}
 
 	private static Article getArticle(Cursor cur) {
@@ -155,10 +159,10 @@ public class FeedHeadlineAdapter extends MainAdapter {
 
 	private static class ViewHolder {
 		TextView title;
-		ImageView icon;
+//		ImageView icon;
 		ImageView feedicon;
 		TextView updateDate;
-		TextView dataSource;
+//		TextView dataSource;
 	}
 
 }
