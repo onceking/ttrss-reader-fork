@@ -55,7 +55,7 @@ public class Constants {
 	public static final String IGNORE_UNSAFE_CONNECTION_ERROR = "IgnoreUnsafeConnectionError";
 
 	// Connection Default Values
-	public static final String URL_DEFAULT = "https://rss.nuvemshop.com/";
+	public static final String URL_DEFAULT = "https://localhost/";
 	public static final String URL_DEFAULT_FEEDICONS = "feed-icons";
 	public static final boolean USE_HTTP_AUTH_DEFAULT = false;
 	public static final boolean USE_PROVIDER_INSTALLER_DEFAULT = true;
