@@ -55,6 +55,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -808,10 +809,11 @@ public class DBHelper {
 		if (url == null)
 			url = "";
 
-		if (url != "" && (icon == null || icon.length == 0)) {
+		if (!url.equals("") && (icon == null || icon.length == 0)) {
 			Feed feed = getFeed(id);
-			if (feed.url == url) {
+			if (Objects.equals(feed.url, url)) {
 				icon = feed.icon;
+				Log.w(TAG, "reusing icon for feed: " + title);
 			}
 		}
 
