@@ -258,7 +258,7 @@ public class FeedHeadlineListFragment extends MainListFragment implements TextIn
 	 */
 	private List<Article> getUnreadAbove(int index) {
 		List<Article> ret = new ArrayList<>();
-		for (int i = 0; i < index; i++) {
+		for (int i = 0; i <= index; i++) {
 			Article a = (Article) adapter.getItem(i);
 			if (a != null && a.isUnread)
 				ret.add(a);
