@@ -21,6 +21,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -32,7 +33,10 @@ import org.ttrssreader.model.pojos.Article;
 import org.ttrssreader.model.pojos.Feed;
 import org.ttrssreader.utils.DateUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class FeedHeadlineAdapter extends MainAdapter {
 
@@ -40,6 +44,15 @@ public class FeedHeadlineAdapter extends MainAdapter {
 
 	private final int feedId;
 	private final boolean selectArticlesForCategory;
+
+	private final static List<Pair<String, Integer>> TIME_UNITS = Arrays.asList(
+			Pair.create("m", 60),
+			Pair.create("h", 3600),
+			Pair.create("d", 86400),
+			Pair.create("w", 7*86400),
+			Pair.create("M", 30*86400),
+			Pair.create("y", 365*86400)
+	);
 
 	public FeedHeadlineAdapter(Context context, int feedId, boolean selectArticlesForCategory) {
 		super(context);
@@ -109,7 +122,7 @@ public class FeedHeadlineAdapter extends MainAdapter {
 //			holder.icon = (ImageView) view.findViewById(R.id.icon);
 			holder.feedicon = (ImageView) view.findViewById(R.id.feedicon);
 			holder.title = (TextView) view.findViewById(R.id.title);
-			holder.updateDate = (TextView) view.findViewById(R.id.updateDate);
+//			holder.updateDate = (TextView) view.findViewById(R.id.updateDate);
 //			holder.dataSource = (TextView) view.findViewById(R.id.dataSource);
 			view.setTag(holder);
 		}
@@ -120,27 +133,20 @@ public class FeedHeadlineAdapter extends MainAdapter {
 //		setImage(holder.icon, a);
 		setFeedImage(holder.feedicon, f);
 
-		holder.title.setText((a.isUnread ? "⬤ " :"◯ ") + a.title );
-		float opacity = a.isUnread ? 1 : 0.7f;
-		for (View transparent: new View[]{holder.title, holder.updateDate/*, holder.dataSource*/}) {
-			transparent.setAlpha(opacity);
-		}
+		String title = a.isUnread ? "◯ " :"⬤ ";
 
-		final long age = Math.abs((new Date()).getTime() - a.updated.getTime()) / 1000;
-		if (age <= 3600) {
-			holder.updateDate.setText("1h");
-		} else if (age <= 24 * 3600) {
-			holder.updateDate.setText(String.format("%dh", (age / 3600)));
-		} else if (age < 24 * 3600 * 100) {
-			holder.updateDate.setText(String.format("%dd", (age / (24 * 3600))));
-		} else {
-			holder.updateDate.setText(">100d");
+		final double age = Math.abs((new Date()).getTime() - a.updated.getTime()) / 1000.0;
+		for ( Pair<String, Integer> time_unit : TIME_UNITS) {
+			long age_scaled = Math.round(age / time_unit.second);
+			if (age_scaled < 10) {
+				title += String.format("[%d%s] ", age_scaled, time_unit.first);
+				break;
+			}
 		}
+		title += a.title;
 
-		// Display Feed-Title in Virtual-Categories or when displaying all Articles in a Category
-//		if ((feedId < 0 && feedId >= -4) || (selectArticlesForCategory)) {
-//			holder.dataSource.setText(a.feedTitle);
-//		}
+		holder.title.setText(title);
+		holder.title.setAlpha(a.isUnread ? 1 : 0.7f);
 	}
 
 	private static Article getArticle(Cursor cur) {
@@ -159,10 +165,7 @@ public class FeedHeadlineAdapter extends MainAdapter {
 
 	private static class ViewHolder {
 		TextView title;
-//		ImageView icon;
 		ImageView feedicon;
-		TextView updateDate;
-//		TextView dataSource;
 	}
 
 }
