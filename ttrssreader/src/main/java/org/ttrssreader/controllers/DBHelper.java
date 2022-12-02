@@ -808,6 +808,13 @@ public class DBHelper {
 		if (url == null)
 			url = "";
 
+		if (url != "" && (icon == null || icon.length == 0)) {
+			Feed feed = getFeed(id);
+			if (feed.url == url) {
+				icon = feed.icon;
+			}
+		}
+
 		synchronized (insertFeedLock) {
 			insertFeed.bindLong(1, Integer.valueOf(id).longValue());
 			insertFeed.bindLong(2, Integer.valueOf(categoryId).longValue());

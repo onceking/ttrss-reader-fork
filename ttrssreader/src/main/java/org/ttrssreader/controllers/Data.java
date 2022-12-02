@@ -402,7 +402,7 @@ public class Data {
 
 					feedsChanged.put(f.categoryId, System.currentTimeMillis());
 				}
-				DBHelper.getInstance().deleteFeeds();
+				//DBHelper.getInstance().deleteFeeds();
 				DBHelper.getInstance().insertFeeds(feeds);
 
 				// Store requested category-id and ids of all received feeds
